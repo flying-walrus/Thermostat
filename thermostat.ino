@@ -3,13 +3,13 @@
 #include <DS18B20.h>
 #include <RunningSample.h>
 #include <Interval.h>
-#include <Hvac.h>
+#include <Relay.h>
 
 // init our library classes. the constants come from thermostat.h
 RunningSample Temperatures( SAMPLE_SIZE );
 Interval SampleInterval( SAMPLE_FREQUENCY );
-Hvac Heater( HEATER_PIN );
-//Hvac AC(AC_PIN) /* i don't have an air conditioner */
+Relay Heater( HEATER_PIN );
+//Relay AC(AC_PIN) /* i don't have an air conditioner */
 DS18B20 Therm( THERMO_PIN );
 
 void setup()
