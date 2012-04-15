@@ -9,6 +9,7 @@
 RunningSample Temperatures( SAMPLE_SIZE );
 Interval SampleInterval( SAMPLE_FREQUENCY );
 Hvac Heater( HEATER_PIN );
+//Hvac AC(AC_PIN) /* i don't have an air conditioner */
 DS18B20 Therm( THERMO_PIN );
 
 void setup()
@@ -27,7 +28,7 @@ void loop()
     collectData();
     newData++;
     
-    regulateHeater();
+    regulateHVAC();
   } 
   
   // if the data has changed, update the display
@@ -52,18 +53,19 @@ void collectData()
 void updateDisplay()
 {
   Serial.println ( Temperatures.getAverage() );
-  Serial.println ( Heater.running() );
 }
 
-void regulateHeater()
+void regulateHVAC()
 {
- if( Temperatures.getAverage() < SETPOINT )
+ if( Temperatures.getAverage() < HEATPOINT )
  {
    Heater.on();
+   //AC.on()
  }
- else
+ else if ( Temperatures.getAverage() > COOLPOINT )
  {
    Heater.off();
+   //AC.on();
  }
   
 }
